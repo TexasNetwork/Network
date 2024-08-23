@@ -1,230 +1,319 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-<a href="https://www.instagram.com/texasnetwork._?igsh=MXhvbDV0emhhcmk4Ng==" target="_blank"><img src="https://upload.wikimedia.org/wikipedia/commons/a/a5/Instagram_icon.png" alt="Instagram" style="width:30px; height:30px;"></a>
-<a href="https://www.facebook.com/seu_perfil" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" style="width:30px; height:30px;">
-<a href="https://www.youtube.com/seu_canal" target="_blank">
-    <img src="https://upload.wikimedia.org/wikipedia/commons/4/42/YouTube_icon_%282013-2017%29.png" alt="YouTube" style="width:30px; height:30px;">
-</a>
-  
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Texas Network</title>
+    <title>Space RPG</title>
     <style>
         body {
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
             background: #121212;
             color: #e0e0e0;
-            text-align: center;
         }
         header {
-            background: #1e1e1e;
-            padding: 20px;
+            background: linear-gradient(90deg, #6a0dad, #ff0000); /* Transição entre roxo e vermelho */
+            padding: 10px;
             color: #ffffff;
+            display: flex;
+            flex-direction: column; /* Empilha o título e os botões verticalmente */
+            align-items: center;
         }
-        header h1 {
-            margin: 0;
-            font-size: 2.5em;
-            letter-spacing: 2px; 
+        .header-title {
+            font-size: 1.5em;
+            margin-bottom: 10px;
         }
         nav {
-            margin-top: 9px;
             display: flex;
-            justify-content: center;
-            align-items: center;
+            gap: 5px; /* Espaço reduzido entre os botões */
+            flex-wrap: wrap; /* Permite que os botões se ajustem em linha */
         }
         nav a {
             color: #ffffff;
             text-decoration: none;
-            margin: 0 11px;
-            font-size: 1.1em;
-            cursor: pointer;
+            font-size: 0.9em; /* Tamanho do texto dos botões reduzido */
+            padding: 8px 12px; /* Padding reduzido para aproximar os botões */
+            border-radius: 5px;
+            background: #5c0d91; /* Roxo escuro */
+            white-space: nowrap; /* Impede quebra de linha */
         }
-        .dropdown {
-            position: relative;
-            display: inline-block;
-        }
-        .dropdown-content {
-            display: none;
-            position: absolute;
-            background-color: #2e2e2e;
-            min-width: 160px;
-            box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
-            z-index: 1;
-        }
-        .dropdown-content a {
-            color: #ffffff;
-            padding: 12px 16px;
-            text-decoration: none;
-            display: block;
-        }
-        .dropdown-content a:hover {
-            background-color: #3e3e3e;
-        }
-        .dropdown:hover .dropdown-content {
-            display: block;
+        nav a:hover {
+            background: #ff007f; /* Rosa */
         }
         .container {
-            width: 80%;
-            margin: 0 auto;
             padding: 20px;
-        }
-        .hero {
-            background: linear-gradient(to right, #ff007f, #00ff99);
-            color: white;
-            padding: 50px 20px;
-            border-radius: 15px;
-            margin: 20px 0;
-        }
-        .hero h2 {
-            font-size: 2em;
-            margin: 0;
+            max-width: 1200px;
+            margin: auto;
         }
         .section {
-            background: #1e1e1e;
-            padding: 20px;
+            border: 2px solid #ff0000; /* Borda vermelha */
             border-radius: 10px;
-            margin: 20px 0;
-            display: none; /* Initially hide all sections */
-        }
-        .section.active {
-            display: block; /* Show active section */
+            padding: 20px;
+            background-color: #1e1e1e;
+            margin-bottom: 20px;
         }
         .section h2 {
-            font-size: 1.5em;
-            margin: 0 0 10px 0;
             color: #ffffff;
+            margin-top: 0;
         }
         .section p {
             font-size: 1.1em;
-            line-height: 1.6;
+        }
+        .back-button {
+            background: #ff007f; /* Rosa */
+            color: #ffffff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1em;
+            margin-bottom: 20px;
+            display: block;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        .back-button:hover {
+            background: #e6007e; /* Rosa escuro */
         }
         footer {
-            background: #1e1e1e;
-            padding: 10px;
-            color: #00ff99;
+            background: #6a0dad; /* Roxo mais escuro */
+            padding: 15px;
+            color: #ffffff;
+            text-align: center;
         }
-        .card {
-            background: #2e2e2e;
+        .rules-menu {
+            display: flex;
+            gap: 10px;
+            justify-content: center;
+            margin-top: 20px;
+        }
+        .rules-menu a {
+            background-color: #6a0dad; /* Roxo */
+            color: #ffffff;
+            padding: 10px 20px;
+            border-radius: 5px;
+            text-decoration: none;
+            font-size: 1em;
+            display: inline-block;
+        }
+        .rules-menu a:hover {
+            background-color: #5c0d91; /* Roxo escuro */
+        }
+        /* Estilo das seções da página inicial */
+        #inicio > .inicio {
+            border: 2px solid #6a0dad; /* Borda roxa ao redor do título */
+            padding: 20px;
+            margin-top: 20px;
+            border-radius: 10px;
+            background-color: #1e1e1e;
+        }
+        /* Estilo do FAQ no rodapé */
+        #faq-container {
+            margin-top: 20px;
+            text-align: center;
+        }
+        #faq-button {
+            background-color: #00ff99;
+            color: #121212;
+            padding: 20px 110px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 1.2em;
+            margin-bottom: 20px;
+        }
+        #faq-content {
+            background-color: #1e1e1e;
             padding: 20px;
             border-radius: 10px;
-            margin: 10px;
-            display: inline-block;
-            width: calc(33% - 40px);
-            box-shadow: 0 0 10px rgba(0,0,0,0.5);
-            vertical-align: top;
-            color: #e0e0e0;
+            max-width: 600px;
+            margin: 0 auto;
             text-align: left;
         }
-        .card h3 {
-            font-size: 1.3em;
-            color: #00ff99;
+        .faq-item {
+            margin-bottom: 10px;
+        }
+        .faq-item h3 {
             margin: 0;
+            cursor: pointer;
+            color: #00ff99;
         }
-        @media (max-width: 768px) {
-            .card {
-                width: calc(50% - 40px);
-            }
+        .faq-answer {
+            margin: 5px 0 15px 0;
+            color: #e0e0e0;
         }
-        @media (max-width: 480px) {
-            .card {
-                width: calc(100% - 40px);
-            }
+        .hidden {
+            display: none;
+        }
+        /* Embeds para cada regra */
+        .rule-item {
+            background-color: #2c2c2c;
+            padding: 15px;
+            border-radius: 8px;
+            margin-bottom: 10px;
+            border: 1px solid #6a0dad; /* Borda roxa */
+        }
+        .rule-item h3 {
+            color: #ff007f; /* Título das regras em rosa */
         }
     </style>
     <script>
         function showSection(sectionId) {
-            // Hide all sections
-            var sections = document.querySelectorAll('.section');
-            sections.forEach(function(section) {
-                section.classList.remove('active');
-            });
-
-            // Show the selected section
-            var section = document.getElementById(sectionId);
-            section.classList.add('active');
+            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+            document.getElementById(sectionId).style.display = 'block';
         }
 
-        // Set default active section
+        function showRulesSection(rulesSectionId) {
+            document.getElementById('regras').style.display = 'none';
+            document.getElementById(rulesSectionId).style.display = 'block';
+        }
+
+        function goBack() {
+            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+            document.getElementById('regras').style.display = 'block';
+        }
+
+        function showFaq() {
+            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+            document.querySelectorAll('.faq-section').forEach(faq => faq.style.display = 'block');
+        }
+
+        function goBackToMain() {
+            document.querySelectorAll('.faq-section').forEach(faq => faq.style.display = 'none');
+            showSection('inicio'); // Voltar para a seção principal
+        }
+
         window.onload = function() {
-            showSection('inicio');
+            showSection('inicio'); // Set default section to "Início"
         };
+
+        document.getElementById("faq-button").onclick = function() {
+            var faqContent = document.getElementById("faq-content");
+            faqContent.classList.toggle("hidden");
+        };
+
+        function toggleFaq(element) {
+            var answer = element.nextElementSibling;
+            answer.classList.toggle("hidden");
+        }
     </script>
 </head>
 <body>
     <header>
-        <h1>Texas Network</h1>
+        <div class="header-title">Space RPG</div>
         <nav>
             <a onclick="showSection('inicio')">Início</a>
             <a onclick="showSection('noticias')">Notícias</a>
             <a onclick="showSection('recursos')">Recursos</a>
-            <div class="dropdown">
-                <a>Regras</a>
-                <div class="dropdown-content">
-                    <a onclick="showSection('regras-gerais')">Regras Gerais</a>
-                    <a onclick="showSection('regras-cops')">Regras COPS</a>
-                    <a onclick="showSection('regras-lideres')">Regras Líderes</a>
-                </div>
-            </div>
+            <a onclick="showSection('regras')">Regras</a>
         </nav>
     </header>
 
     <div class="container">
-        <div id="inicio" class="section active">
-            <div class="hero">
-                <h2>Bem-vindo ao Melhor Servidor de SAMP RPG!</h2>
-                <p>Explore, jogue e viva aventuras inesquecíveis dentro do Texas.</p>
+        <div id="inicio" class="section" style="display: block;">
+            <div class="inicio">
+                <h2>Space RPG</h2>
+                <p>O Space é um servidor que tem a função de trazer a diversão. Contamos com sistemas inovadores e estamos sempre atualizando.</p>
+            </div>
+            <div class="inicio">
+                <h2>Informação principal</h2>
+                <p>Pedro é lindo.</p>
             </div>
         </div>
-
+        
         <div id="noticias" class="section">
             <h2>Últimas Notícias</h2>
-            <p>Fique por dentro das últimas atualizações e eventos do servidor. Nossa equipe está sempre trabalhando para trazer novidades emocionantes para você!</p>
+            <p>Quem djabo é Cesar.</p>
         </div>
 
         <div id="recursos" class="section">
             <h2>Recursos do Servidor</h2>
-            <div class="card">
-                <h3>Experiencias</h3>
-                <p>Explore um vasto servidor com missões, eventos e muito mais. Entre no nosso Discord para obter mais informações.</p>
-            </div>
-            <div class="card">
-                <h3>Customização Completa</h3>
-                <p>Personalize seu personagem com uma ampla gama de opções e novos acessórios que você só encontra aqui.</p>
-            </div>
-            <div class="card">
-                <h3>Eventos Diários</h3>
-                <p>Participe de eventos diários e conquiste prêmios incríveis!</p>
+            <p>Eu só faço o site.</p>
+        </div>
+
+        <div id="regras" class="section">
+            <h2>Regras</h2>
+            <p>Clique nas regras abaixo para mais detalhes:</p>
+            <div class="rules-menu">
+                <a onclick="showRulesSection('regras-gerais')">Regras Gerais</a>
+                <a onclick="showRulesSection('regras-cops')">Regras COPS</a>
+                <a onclick="showRulesSection('regras-lideres')">Regras Líderes</a>
             </div>
         </div>
 
-        <div id="regras-gerais" class="section">
+        <div id="regras-gerais" class="section" style="display: none;">
+            <button class="back-button" onclick="goBack()">Voltar</button>
             <h2>Regras Gerais</h2>
-            <p>Em breve.</p>
+            <div class<div class="rule-item">
+                <h3>Regra 1: </h3>
+                <p>.</p>
+            </div>
+            <div class="rule-item">
+                <h3>Regra 2: </h3>
+                <p></p>
+            </div>
+            <div class="rule-item">
+                <h3>Regra 3: </h3>
+                <p></p>
+            </div>
         </div>
 
-        <div id="regras-cops" class="section">
+        <div id="regras-cops" class="section" style="display: none;">
+            <button class="back-button" onclick="goBack()">Voltar</button>
             <h2>Regras COPS</h2>
-            <p>Em breve..</p>
+            <div class="rule-item">
+                <h3>Regra 1: </h3>
+                <p></p>
+            </div>
+            <div class="rule-item">
+                <h3>Regra 2: </h3>
+                <p></p>
+            </div>
+            <div class="rule-item">
+                <h3>Regra 3: </h3>
+                <p></p>
+            </div>
         </div>
 
-        <div id="regras-lideres" class="section">
+        <div id="regras-lideres" class="section" style="display: none;">
+            <button class="back-button" onclick="goBack()">Voltar</button>
             <h2>Regras Líderes</h2>
-            <p>Em breve.</p>
+            <div class="rule-item">
+                <h3>Regra 1: </h3>
+                <p></p>
+            </div>
+            <div class="rule-item">
+                <h3>Regra 2: </h3>
+                <p></p>
+            </div>
+            <div class="rule-item">
+                <h3>Regra 3: leu porque ?</h3>
+                <p></p>
+            </div>
         </div>
     </div>
 
     <footer>
-        
-    
-    <!-- Código para incorporar a música do YouTube -->
-    <iframe width=398" height="150" src="https://www.youtube.com/embed/TKqa-ZXGKYA" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-
-      <p>&copy; 2024 Servidor SAMP RPG. Todos os direitos reservados.</p>
+        <p>Space RPG - Todos os direitos reservados © 2024</p>
     </footer>
-  
+
+    <div id="faq-container">
+        <button id="faq-button">FAQ</button>
+        <div id="faq-content" class="hidden">
+            <div class="faq-item">
+                <h3 onclick="toggleFaq(this)">O que é Space RPG?</h3>
+                <p class="faq-answer hidden">Space RPG é um servidor de RPG no qual você pode explorar um mundo virtual e participar de várias atividades.</p>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFaq(this)">Como eu posso me tornar um líder?</h3>
+                <p class="faq-answer hidden">Para se tornar um líder, você deve participar ativamente do servidor e cumprir as regras estabelecidas. Entre em contato com a administração para mais detalhes.</p>
+            </div>
+            <div class="faq-item">
+                <h3 onclick="toggleFaq(this)">Posso usar mods no servidor?</h3>
+                <p class="faq-answer hidden">Alguns mods são permitidos, mas você deve consultar as regras do servidor ou a administração antes de usá-los.</p>
+            </div>
+        </div>
+    </div>
 </body>
 </html>
