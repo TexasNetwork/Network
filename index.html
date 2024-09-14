@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Space</title>
+    <title>Texas Network</title>
     <style>
         body {
             font-family: Arial, sans-serif;
@@ -84,6 +84,7 @@
         }
         .rules-menu {
             display: flex;
+            flex-direction: column;
             gap: 10px;
             justify-content: center;
             margin-top: 20px;
@@ -95,10 +96,14 @@
             border-radius: 5px;
             text-decoration: none;
             font-size: 1em;
-            display: inline-block;
+            display: block;
+            text-align: center;
         }
         .rules-menu a:hover {
             background-color: #5c0d91; /* Roxo escuro */
+        }
+        .hidden {
+            display: none;
         }
         /* Estilo das seções da página inicial */
         #inicio > .inicio {
@@ -108,43 +113,40 @@
             border-radius: 10px;
             background-color: #1e1e1e;
         }
-        /* Estilo do FAQ no rodapé */
-        #faq-container {
+        #loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: #000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 1000;
+        }
+        #loading-screen img {
+            width: 150px;
+            height: auto;
+        }
+        #loading-screen .progress-container {
+            width: 100%;
+            max-width: 300px;
+            background-color: #333;
+            border-radius: 5px;
             margin-top: 20px;
             text-align: center;
         }
-        #faq-button {
-            background-color: #00ff99;
-            color: #121212;
-            padding: 20px 110px;
-            border: none;
+        #loading-screen .progress-bar {
+            height: 10px;
+            width: 0;
+            background-color: #ff0000;
             border-radius: 5px;
-            cursor: pointer;
-            font-size: 1.2em;
-            margin-bottom: 20px;
+            transition: width 3s;
         }
-        #faq-content {
-            background-color: #1e1e1e;
-            padding: 20px;
-            border-radius: 10px;
-            max-width: 600px;
-            margin: 0 auto;
-            text-align: left;
-        }
-        .faq-item {
-            margin-bottom: 10px;
-        }
-        .faq-item h3 {
-            margin: 0;
-            cursor: pointer;
-            color: #00ff99;
-        }
-        .faq-answer {
-            margin: 5px 0 15px 0;
-            color: #e0e0e0;
-        }
-        .hidden {
-            display: none;
+        #loading-screen p {
+            color: #fff;
+            margin-top: 10px;
         }
     </style>
     <script>
@@ -154,57 +156,57 @@
         }
 
         function showRulesSection(rulesSectionId) {
-            document.getElementById('regras').style.display = 'none';
+            document.getElementById('regras-menu').style.display = 'none';
             document.getElementById(rulesSectionId).style.display = 'block';
         }
 
         function goBack() {
             document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
-            document.getElementById('regras').style.display = 'block';
-        }
-
-        function showFaq() {
-            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
-            document.getElementById('faq-content').style.display = 'block';
-        }
-
-        function goBackToMain() {
-            document.querySelectorAll('.faq-section').forEach(faq => faq.style.display = 'none');
-            showSection('inicio'); // Voltar para a seção principal
+            document.getElementById('regras-menu').style.display = 'block';
         }
 
         document.addEventListener('DOMContentLoaded', function() {
-            showSection('inicio'); // Set default section to "Início"
+            // Hides all sections initially except the start
+            document.querySelectorAll('.section').forEach(section => section.style.display = 'none');
+            document.getElementById('inicio').style.display = 'block';
 
-            document.getElementById("faq-button").onclick = function() {
-                var faqContent = document.getElementById("faq-content");
-                faqContent.classList.toggle("hidden");
-            };
-
-            document.querySelectorAll('.faq-item h3').forEach(item => {
-                item.addEventListener('click', function() {
-                    var answer = this.nextElementSibling;
-                    answer.classList.toggle("hidden");
-                });
-            });
+            // Simula o progresso da barra de carregamento
+            var progressBar = document.querySelector('#loading-screen .progress-bar');
+            setTimeout(function() {
+                progressBar.style.width = '100%';
+                // Esconde a tela de carregamento após a barra preencher
+                setTimeout(function() {
+                    document.getElementById('loading-screen').style.display = 'none';
+                }, 3000); // 3 segundos para a barra preencher
+            }, 100);
         });
     </script>
 </head>
 <body>
+    <div id="loading-screen"> 
+        <div> 
+            <img src="https://i.ibb.co/JFDS55t/00b48b2f21aeacd5d1af88804b5b7fcb.png" alt="00b48b2f21aeacd5d1af88804b5b7fcb" border="0"></a>
+            <div class="progress-container">
+                <div class="progress-bar"></div>
+            </div> 
+            <p>Texas Network RPG.</p>
+        </div>
+    </div>
+
     <header>
-        <div class="header-title">Space RPG</div>
+        <div class="header-title">Texas Network</div>
         <nav>
             <a onclick="showSection('inicio')">Início</a>
             <a onclick="showSection('noticias')">Notícias</a>
             <a onclick="showSection('recursos')">Recursos</a>
-            <a onclick="showSection('regras')">Regras</a>
+            <a onclick="showSection('regras-menu')">Regras</a>
         </nav>
     </header>
 
     <div class="container">
-        <div id="inicio" class="section" style="display: block;">
+        <div id="inicio" class="section" style="display: none;">
             <div class="inicio">
-                <h2>Space RPG</h2>
+                <h2>Ultimas noticias</h2>
                 <p>É muito é massa.</p>
             </div>
             <div class="inicio">
@@ -223,13 +225,13 @@
             <p>Explore os recursos e benefícios oferecidos pelo servidor.</p>
         </div>
 
-        <div id="regras" class="section">
+        <div id="regras-menu" class="section" style="display: none;">
             <h2>Regras</h2>
-            <p>Clique nas regras abaixo para mais detalhes:</p>
             <div class="rules-menu">
                 <a onclick="showRulesSection('regras-gerais')">Regras Gerais</a>
                 <a onclick="showRulesSection('regras-cops')">Regras COPS</a>
                 <a onclick="showRulesSection('regras-lideres')">Regras Líderes</a>
+                <a onclick="showRulesSection('regras-terroristas')">Regras Terroristas</a>
             </div>
         </div>
 
@@ -237,91 +239,73 @@
             <button class="back-button" onclick="goBack()">Voltar</button>
             <h2>Regras Gerais</h2>
             <div class="rule-item">
-                <h3>Regra 1</h3>
+                <h3>1:</h3>
                 <p>Proibido DM, DB ou qualquer outro tipo de dano que prejudique o HP do player e/ou o seu veículo.</p>
             </div>
+            <div class="<div class="rule-item">
+                <h3>2:</h3>
+                <p>É proibido usar cheats, hacks ou qualquer outro software que possa dar vantagem sobre os demais jogadores.</p>
+            </div>
             <div class="rule-item">
-                <h3>Regra 2</h3>
-                <p>Proibido ANT-RPG.</p>
+                <h3>3:</h3>
+                <p>Respeite todos os jogadores e não use linguagem ofensiva ou discriminatória.</p>
             </div>
-            <div class="rule-item"><h3>Regra 3</h3>
-                <p>Proibido uso de cheats ou exploits.</p>
-            </div>
-            <div>
-                <h4>Créditos pelas regras gerais:</h4>
-                <p>Departamento Administrativo</p>
-            </div>
+            <!-- Adicione mais regras gerais conforme necessário -->
         </div>
 
         <div id="regras-cops" class="section" style="display: none;">
             <button class="back-button" onclick="goBack()">Voltar</button>
             <h2>Regras COPS</h2>
             <div class="rule-item">
-                <h3>Regra COPS 1</h3>
-                <p>Descrição da regra COPS 1.</p>
+                <h3>1:</h3>
+                <p></p>
             </div>
             <div class="rule-item">
-                <h3>Regra COPS 2</h3>
-                <p>Descrição da regra COPS 2.</p>
+                <h3>2:</h3>
+                <p></p>
             </div>
-            <div class="rule-item">
-                <h3>Regra COPS 3</h3>
-                <p>Descrição da regra COPS 3.</p>
-            </div>
-            <div>
-                <h4>Créditos pelas regras:</h4>
-                <p>Departamento Superior Space</p>
-            </div>
+            <!-- Adicione mais regras COPS conforme necessário -->
         </div>
 
         <div id="regras-lideres" class="section" style="display: none;">
             <button class="back-button" onclick="goBack()">Voltar</button>
             <h2>Regras Líderes</h2>
             <div class="rule-item">
-                <h3>Regra Líderes 1</h3>
-                <p>Descrição da regra Líderes 1.</p>
+                <h3>Regra 1</h3>
+                <p></p>
             </div>
             <div class="rule-item">
-                <h3>Regra Líderes 2</h3>
-                <p>Descrição da regra Líderes 2.</p>
+                <h3>Regra 2</h3>
+                <p></p>
             </div>
-            <div class="rule-item">
-                <h3>Regra Líderes 3</h3>
-                <p>Descrição da regra Líderes 3.</p>
-            </div>
-            <div>
-                <h4>Créditos pelas regras::</h4>
-                <p>Departamento de Líderes.</p>
-            </div>
+            <!-- Adicione mais regras Líderes conforme necessário -->
         </div>
 
+        <div id="regras-terroristas" class="section" style="display: none;">
+            <button class="back-button" onclick="goBack()">Voltar</button>
+            <h2>Regras Terroristas</h2>
+            <div class="rule-item">
+                <h3>Regra 1</h3>
+                <p></p>
+            </div>
+            <div class="rule-item">
+                <h3>Regra 2</h3>
+                <p></p>
+            </div>
+            <!-- Adicione mais regras Terroristas conforme necessário -->
+        </div>
     </div>
 
     <footer>
-        <div id="faq-container">
-            <button id="faq-button">FAQ</button>
-            <div id="faq-content" class="hidden">
-                <div class="faq-item">
-                    <h3>Quais as Redes Socias?</h3>
-                    <div class="faq-answer hidden">
-                        <p>Da /ajuda</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <h3>Como viro Líder ?</h3>
-                    <div class="faq-answer hidden">
-                        <p>Da /ajuda</p>
-                    </div>
-                </div>
-                <div class="faq-item">
-                    <h3>Como obtenho suporte?</h3>
-                    <div class="faq-answer hidden">
-                        <p>Da /ajuda</p>
-                    </div>
-                </div>
-                
-            </div>
-        </div>
+        <p>&copy; 2024 Texas Network. Todos os direitos reservados.</p>
     </footer>
+    <h1>Jogue no celular:</h1>
+    <p>Instale o aplicativo SA-MP Launcher na Play Store e adicione nosso IP aos favoritos.
+        Nosso proprio Launcher/Apk está em desenvolvimento.
+    </p>
 </body>
 </html>
+
+
+
+ 
